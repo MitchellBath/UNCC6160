@@ -1,0 +1,13 @@
+{% include 'header.html' %}
+<div style="margin: 5px;">
+    <form method="POST" class="form-inline" action="/post/edit/{{postid}}">
+        <input type="hidden" id="post_create_date" name="post_create_date" value="{{post.post_create_date}}">
+        <label for="title">Enter Title</label><br>
+        <input type="text" id="title" name="title" value="{{post.post_title}}" placeholder="Title"><br><br>
+        <label for="content">Enter Content</label><br>
+        <textarea id="content" name="content" placeholder="Post Content" rows="5" cols="45" required>{{post.post_contents}}</textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}

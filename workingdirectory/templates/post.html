@@ -1,0 +1,57 @@
+{% include 'header.html' %}
+<h2>{{post[2]}}</h2>
+{% if post[1] == current_userId %}
+<form method="GET" action="/post/edit/{{post[0]}}">
+    <button type="submit">Edit</button>
+</form>
+<form method="POST" action="/post/delete/{{post[0]}}">
+    <button type="submit">Delete</button>
+</form>
+{% endif %}
+<br>
+<p>Posted by {{post[1]}} on {{post[4]}}</p>
+<p>{{post[3]}}</p>
+Add comment:<br>
+<form method="POST" class="form-inline" action="/post/{{post[0]}}">
+    <textarea id="comment" name="comment" rows="3" cols="45"></textarea><br>
+    <button type="submit">Comment</button>
+</form>
+<br>
+
+<!-- upvoted by user -->
+{% if userVote[2] == 1 %}
+<form method="POST" action="/vote/{{post[0]}}">
+    <button disabled name="btn" value="1" class="upvote" type="submit">Upvote</button>
+    <button name="btn" value="0" type="submit">Downvote</button>
+    <button name="btn" value="2" type="submit">Cancel Vote</button>
+</form>
+<!-- downvoted by user -->
+{% elif userVote != None and userVote[2] == 0 %}
+<form method="POST" action="/vote/{{post[0]}}">
+    <button name="btn" value="1" type="submit">Upvote</button>
+    <button disabled name="btn" value="0" class="downvote" type="submit">Downvote</button>
+    <button name="btn" value="2" type="submit">Cancel Vote</button>
+</form>
+<!-- No action yet by user -->
+{% else %}
+<form method="POST" action="/vote/{{post[0]}}">
+    <button name="btn" value="1" type="submit">Upvote</button>
+    <button name="btn" value="0" type="submit">Downvote</button>
+</form>
+{% endif %}
+
+
+<h3>All comments</h3>
+<ul>
+    {% for row in comments %}
+    <li>
+        {{row[3]}}
+        {% if row[1] == current_userId %}
+        <form method="POST" action="/comment/delete/{{row[0]}}/{{post[0]}}">
+            <button type="submit">Delete</button>
+        </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% include 'footer.html' %}

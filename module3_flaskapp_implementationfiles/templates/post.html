@@ -1,0 +1,59 @@
+{% include 'header.html' %}
+<h2>{{post.post_title}}</h2>
+{% if post.user_id == current_userId %}
+<form method="GET" action="/post/edit/{{postid}}">
+    <button type="submit">Edit</button>
+</form>
+<form method="POST" action="/post/delete/{{postid}}">
+    <input type="hidden" id="title" name="title" value="{{post.post_title}}">
+    <button type="submit">Delete</button>
+</form>
+{% endif %}
+<br>
+<p>Posted by {{post.user_name}} on {{post.post_create_date}}</p>
+<p>{{post.post_contents}}</p>
+Add comment:<br>
+<form method="POST" class="form-inline" action="/comment/create/{{postid}}">
+    <textarea id="comment" name="comment" rows="3" cols="45"></textarea><br>
+    <button type="submit">Comment</button>
+</form>
+<br>
+
+
+<!-- upvoted by user -->
+{% if userVote and userVote[0].vote_type == True %}
+<form method="POST" action="/vote/{{postid}}">
+    <button disabled name="btn" value="1" class="upvote" type="submit">Upvote</button>
+    <button name="btn" value="0" type="submit">Downvote</button>
+    <button name="btn" value="2" type="submit">Cancel Vote</button>
+</form>
+<!-- downvoted by user -->
+{% elif userVote and userVote[0].vote_type == False %}
+<form method="POST" action="/vote/{{postid}}">
+    <button name="btn" value="1" type="submit">Upvote</button>
+    <button disabled name="btn" value="0" class="downvote" type="submit">Downvote</button>
+    <button name="btn" value="2" type="submit">Cancel Vote</button>
+</form>
+<!-- No action yet by user -->
+{% else %}
+<form method="POST" action="/vote/{{postid}}">
+    <button name="btn" value="1" type="submit">Upvote</button>
+    <button name="btn" value="0" type="submit">Downvote</button>
+</form>
+{% endif %}
+
+
+<h3>All comments</h3>
+<ul>
+    {% for row in comments %}
+    <li>
+        {{row[2]}}
+        {% if row[3] == current_userId %}
+        <form method="POST" action="/comment/delete/{{row[1]}}/{{post[0]}}">
+            <button type="submit">Delete</button>
+        </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% include 'footer.html' %}

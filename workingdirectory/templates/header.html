@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="../static/styles/styles.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}" />
+    <title>Blog</title>
+</head>
+<body>
+    <nav>
+        <h2>Selected User Id is:{{session['user_id']}} and Name is {{session['full_name']}}</h2>
+        <a href='/home'>Home</a>
+        <a href='/posts'>All posts</a>
+        <a href='/post/create'>Create New Post</a>
+        <a href="/">Change User</a>
+    </nav>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles/styles.css">
+    <title>Blog</title>
+</head>
+<body>
+    <nav>
+        <h1> Please select the user to proceed.</h1>
+    </nav>
+<form method="POST" class="form-inline">
+<p style="font-family:verdana">
+    Select User:<SELECT name="users" style="font-family:verdana">
+        {% for j in users %}
+        <OPTION value={{j[0]}}>{{j[4]}}</OPTION>
+        {% endfor %}
+    </SELECT>
+</p>
+<input type="submit" name="Submit">
+</form>
+<footer><small>Copyright &copy; ITCS 6160 - Database System</small></footer>
+    
+</body>
+
+</html>
+

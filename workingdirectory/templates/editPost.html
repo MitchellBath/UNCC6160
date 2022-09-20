@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+<div style="margin: 5px;">
+    <form method="POST" class="form-inline" action="/post/edit/{{post[0]}}">
+        <label for="title">Enter Title</label><br>
+        <input type="text" id="title" name="title" value="{{post[2]}}" placeholder="Title"><br><br>
+        <label for="content">Enter Content</label><br>
+        <textarea id="content" name="content" placeholder="Post Content" rows="5" cols="45">{{post[3]}}</textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}

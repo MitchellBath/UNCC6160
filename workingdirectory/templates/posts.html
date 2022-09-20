@@ -1,0 +1,8 @@
+{% include 'header.html' %}
+<ol>
+    {% for row in posts %}
+        <a href="/post/{{row[0]}}"><li>{{row[2]}}</li></a>
+    {% endfor %}
+</ol>
+
+<!-- {% include 'footer.html' %} -->

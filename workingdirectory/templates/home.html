@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+<h2>Top posts</h2>
+<ol>
+    {% for row in posts %}
+        <a href="/post/{{row[0]}}"><li>{{row[2]}}</li></a>
+    {% endfor %}
+</ol>
+
+<form method="POST" class="form-inline" action="{{ url_for('home') }}">
+    <h3>Search Post Title</h3>
+    <input type="text" name="search_by_title" placeholder="Search title">
+    <input type="submit" name="Submit">
+</form>
+
+{% if search_posts:%}
+<h2>Search Results</h2>
+<ol>
+    {% for row in search_posts %}
+        <a href="/post/{{row[0]}}"><li>{{row[2]}}</li></a>
+    {% endfor %}
+</ol>
+{%else:%}
+<p>There is no data to show</p>
+{% endif %}
+{% include 'footer.html' %}
+
